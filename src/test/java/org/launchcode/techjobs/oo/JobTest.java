@@ -15,7 +15,7 @@ public class JobTest {
         Job job1 = new Job();
         Job job2 = new Job();
 
-        assertNotEquals(job1, job2);
+        assertNotEquals(job1.getId(), job2.getId());
     }
     @Test
     public void testJobConstructorSetsAllFields(){
@@ -51,25 +51,25 @@ public class JobTest {
     @Test
     public void testToStringContainsCorrectLabelsAndData() {
         Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        Assert.assertEquals("""
-                ID: 4
-                Name: Product tester
-                Employer: ACME
-                Location: Desert
-                Position Type: Quality control
-                Core Competency: Persistence""", testJob.toString().trim());
+        String expected = System.lineSeparator() + "ID: " + testJob.getId() + "\n" +
+                "Name: Product tester\n" +
+                "Employer: ACME\n" +
+                "Location: Desert\n" +
+                "Position Type: Quality control\n" +
+                "Core Competency: Persistence" + System.lineSeparator();
+        Assert.assertEquals(expected, testJob.toString());
     }
 
     @Test
     public void testToStringHandlesEmptyField() {
         Job testJob = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
-        Assert.assertEquals("""
-                ID: 3
-                Name: Data not available
-                Employer: Data not available
-                Location: Data not available
-                Position Type: Data not available
-                Core Competency: Data not available""", testJob.toString().trim());
+        String expected = System.lineSeparator() + "ID: " + testJob.getId() + "\n" +
+                "Name: Data not available\n" +
+                "Employer: Data not available\n" +
+                "Location: Data not available\n" +
+                "Position Type: Data not available\n" +
+                "Core Competency: Data not available" + System.lineSeparator();
+        Assert.assertEquals(expected, testJob.toString());
     }
 
 }
